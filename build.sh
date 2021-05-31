@@ -1,4 +1,5 @@
 #!/bin/sh
+export PATH="/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin"
 dir="$( cd "$( dirname "$0"  )" && pwd  )"
 cd $dir
 
@@ -7,9 +8,12 @@ GEM_BIN=$GEM_HOME/bin
 export GEM_PATH=$GEM_PATH:$GEM_HOME
 export PATH=$PATH:$GEM_BIN
 
-rm -f 工程师之路.html 工程师之路.pdf
+rm -f AsciiDoc文档.html
+rm -f images/*
+rm -rf .asciidoctor/
 
-bundle exec rake book:build
-#sed -i 's#https://cdnjs.cloudflare.com/ajax/libs/highlight.js/.*/styles/github.min.css#css/github.min.css#' 工程师之路.html
-#sed -i 's#https://cdnjs.cloudflare.com/ajax/libs/highlight.js/.*/highlight.min.js#js/highlight.min.js#' 工程师之路.html
-#sed -i 's#https://cdnjs.cloudflare.com/ajax/libs/mathjax/.*/MathJax.js#js/MathJax/MathJax.js#' 工程师之路.html
+
+bundle exec rake book:build_html
+sed -i 's#https://cdnjs.cloudflare.com/ajax/libs/highlight.js/.*/styles/github.min.css#css/github.min.css#' AsciiDoc文档.html
+sed -i 's#https://cdnjs.cloudflare.com/ajax/libs/highlight.js/.*/highlight.min.js#js/highlight.min.js#' AsciiDoc文档.html
+sed -i 's#https://cdnjs.cloudflare.com/ajax/libs/mathjax/.*/MathJax.js#js/MathJax/MathJax.js#' AsciiDoc文档.html
